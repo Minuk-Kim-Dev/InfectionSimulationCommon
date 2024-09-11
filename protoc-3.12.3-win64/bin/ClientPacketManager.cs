@@ -23,36 +23,28 @@ class PacketManager
 
 	public void Register()
 	{		
-		_onRecv.Add((ushort)MsgId.HcEnterGame, MakePacket<HC_EnterGame>);
-		_handler.Add((ushort)MsgId.HcEnterGame, PacketHandler.HC_EnterGameHandler);		
-		_onRecv.Add((ushort)MsgId.HcLeaveGame, MakePacket<HC_LeaveGame>);
-		_handler.Add((ushort)MsgId.HcLeaveGame, PacketHandler.HC_LeaveGameHandler);		
-		_onRecv.Add((ushort)MsgId.HcSpawn, MakePacket<HC_Spawn>);
-		_handler.Add((ushort)MsgId.HcSpawn, PacketHandler.HC_SpawnHandler);		
-		_onRecv.Add((ushort)MsgId.HcDespawn, MakePacket<HC_Despawn>);
-		_handler.Add((ushort)MsgId.HcDespawn, PacketHandler.HC_DespawnHandler);		
-		_onRecv.Add((ushort)MsgId.HcMove, MakePacket<HC_Move>);
-		_handler.Add((ushort)MsgId.HcMove, PacketHandler.HC_MoveHandler);		
-		_onRecv.Add((ushort)MsgId.HcShoot, MakePacket<HC_Shoot>);
-		_handler.Add((ushort)MsgId.HcShoot, PacketHandler.HC_ShootHandler);		
-		_onRecv.Add((ushort)MsgId.HcChangeHp, MakePacket<HC_ChangeHp>);
-		_handler.Add((ushort)MsgId.HcChangeHp, PacketHandler.HC_ChangeHpHandler);		
-		_onRecv.Add((ushort)MsgId.HcDie, MakePacket<HC_Die>);
-		_handler.Add((ushort)MsgId.HcDie, PacketHandler.HC_DieHandler);		
-		_onRecv.Add((ushort)MsgId.ScRejectLogin, MakePacket<SC_RejectLogin>);
-		_handler.Add((ushort)MsgId.ScRejectLogin, PacketHandler.SC_RejectLoginHandler);		
-		_onRecv.Add((ushort)MsgId.ScAcceptLogin, MakePacket<SC_AcceptLogin>);
-		_handler.Add((ushort)MsgId.ScAcceptLogin, PacketHandler.SC_AcceptLoginHandler);		
-		_onRecv.Add((ushort)MsgId.ScRoomList, MakePacket<SC_RoomList>);
-		_handler.Add((ushort)MsgId.ScRoomList, PacketHandler.SC_RoomListHandler);		
-		_onRecv.Add((ushort)MsgId.ScRejectEnter, MakePacket<SC_RejectEnter>);
-		_handler.Add((ushort)MsgId.ScRejectEnter, PacketHandler.SC_RejectEnterHandler);		
-		_onRecv.Add((ushort)MsgId.ScAcceptEnter, MakePacket<SC_AcceptEnter>);
-		_handler.Add((ushort)MsgId.ScAcceptEnter, PacketHandler.SC_AcceptEnterHandler);		
-		_onRecv.Add((ushort)MsgId.ScAcceptMake, MakePacket<SC_AcceptMake>);
-		_handler.Add((ushort)MsgId.ScAcceptMake, PacketHandler.SC_AcceptMakeHandler);		
-		_onRecv.Add((ushort)MsgId.ScRejectMake, MakePacket<SC_RejectMake>);
-		_handler.Add((ushort)MsgId.ScRejectMake, PacketHandler.SC_RejectMakeHandler);
+		_onRecv.Add((ushort)MsgId.SEnterGame, MakePacket<S_EnterGame>);
+		_handler.Add((ushort)MsgId.SEnterGame, PacketHandler.S_EnterGameHandler);		
+		_onRecv.Add((ushort)MsgId.SLeaveGame, MakePacket<S_LeaveGame>);
+		_handler.Add((ushort)MsgId.SLeaveGame, PacketHandler.S_LeaveGameHandler);		
+		_onRecv.Add((ushort)MsgId.SSpawn, MakePacket<S_Spawn>);
+		_handler.Add((ushort)MsgId.SSpawn, PacketHandler.S_SpawnHandler);		
+		_onRecv.Add((ushort)MsgId.SDespawn, MakePacket<S_Despawn>);
+		_handler.Add((ushort)MsgId.SDespawn, PacketHandler.S_DespawnHandler);		
+		_onRecv.Add((ushort)MsgId.SMove, MakePacket<S_Move>);
+		_handler.Add((ushort)MsgId.SMove, PacketHandler.S_MoveHandler);		
+		_onRecv.Add((ushort)MsgId.SSync, MakePacket<S_Sync>);
+		_handler.Add((ushort)MsgId.SSync, PacketHandler.S_SyncHandler);		
+		_onRecv.Add((ushort)MsgId.SStartScenario, MakePacket<S_StartScenario>);
+		_handler.Add((ushort)MsgId.SStartScenario, PacketHandler.S_StartScenarioHandler);		
+		_onRecv.Add((ushort)MsgId.SNextProgress, MakePacket<S_NextProgress>);
+		_handler.Add((ushort)MsgId.SNextProgress, PacketHandler.S_NextProgressHandler);		
+		_onRecv.Add((ushort)MsgId.STalk, MakePacket<S_Talk>);
+		_handler.Add((ushort)MsgId.STalk, PacketHandler.S_TalkHandler);		
+		_onRecv.Add((ushort)MsgId.SEquip, MakePacket<S_Equip>);
+		_handler.Add((ushort)MsgId.SEquip, PacketHandler.S_EquipHandler);		
+		_onRecv.Add((ushort)MsgId.SUnEquip, MakePacket<S_UnEquip>);
+		_handler.Add((ushort)MsgId.SUnEquip, PacketHandler.S_UnEquipHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

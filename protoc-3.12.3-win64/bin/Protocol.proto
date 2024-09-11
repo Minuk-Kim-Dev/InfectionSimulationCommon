@@ -5,221 +5,150 @@ import "google/protobuf/timestamp.proto";
 option csharp_namespace = "Google.Protobuf.Protocol";
 
 enum MsgId {
-  HC_ENTER_GAME = 0;
-  HC_LEAVE_GAME = 1;
-  HC_SPAWN = 2;
-  HC_DESPAWN = 3;
-  CH_MOVE = 4;
-  HC_MOVE = 5;
-  CH_SHOOT = 6;
-  HC_SHOOT = 7;
-  HC_CHANGE_HP = 8;
-  HC_DIE = 9;
-  HS_UPDATE_ROOM = 10;
-  HS_START_GAME = 11;
-  HS_END_GAME = 12;
-  CH_EXIT_ROOM = 13;
-  CS_LOGIN = 14;
-  SC_REJECT_LOGIN = 15;
-  SC_ACCEPT_LOGIN = 16;
-  SC_ROOM_LIST = 17;
-  CS_ENTER_ROOM = 18;
-  SC_REJECT_ENTER = 19;
-  SC_ACCEPT_ENTER = 20;
-  CS_MAKE_ROOM = 21;
-  SC_ACCEPT_MAKE = 22;
-  SC_REJECT_MAKE = 23;
-  SH_CONNECT_CLIENT = 24;
+  S_ENTER_GAME = 0;
+  S_LEAVE_GAME = 1;
+  S_SPAWN = 2;
+  S_DESPAWN = 3;
+  C_MOVE = 4;
+  S_MOVE = 5;
+  C_SYNC = 6;
+  S_SYNC = 7;
+  C_LOGIN = 8;
+  C_START_SCENARIO = 9;
+  S_START_SCENARIO = 10;
+  C_COMPLETE = 11;
+  S_NEXT_PROGRESS = 12;
+  C_TALK = 13;
+  S_TALK = 14;
+  C_EQUIP = 15;
+  S_EQUIP = 16;
+  C_UN_EQUIP = 17;
+  S_UN_EQUIP = 18;
 }
 
-enum ActionState {
+enum CreatureState{
   IDLE = 0;
   RUN = 1;
-  DASH = 2;
-  DEAD = 3;
+  CONVERSATION = 2;
+  USING_PHONE = 3;
+  SETTING = 4;
+  CLEAN = 5;
+  PICK_UP = 6;
+  USING_INVENTORY = 7;
+  PUSH = 8;
+  SIT = 9;
+  TYPING = 10;
 }
 
-enum WeaponState{
-  SAFE = 0;
-  UNSAFE = 1;
-  RELOAD = 2;
-  SHOOT = 3;
+enum GameObjectType{
+  None = 0;
+  Player = 1;
+  N_P_C = 2;
 }
 
-enum DirX {
-  RIGHT = 0;
-  LEFT = 1;
+message S_UnEquip{
+  int32 Id = 1;
+  string ItemName = 2;
 }
 
-enum GameObjectType {
-  NONE = 0;
-  PLAYER = 1;
-  MONSTER = 2;
-  PROJECTILE = 3;
+message C_UnEquip{
+  string ItemName = 1;
 }
 
-enum WeaponType {
-  SMG = 0;
-  AR = 1;
-  HG = 2;
-  SR = 3;
+message S_Equip{
+  int32 Id = 1;
+  string ItemName = 2;
 }
 
-message HC_EnterGame {
-  ObjectInfo player = 1;
+message C_Equip{
+  string ItemName = 1;
 }
 
-message HC_LeaveGame {
-
+message S_Talk{
+  int32 Id = 1;
+  string Message = 2;
 }
 
-message HC_Spawn {
-  repeated ObjectInfo objects = 1;
+message C_Talk{
+  string Message = 1;
 }
 
-message HC_Despawn {
-  repeated int32 objectIds = 1;
-}
-
-message CH_Move {
-  PositionInfo posInfo = 1;
-}
-
-message HC_Move {
-  int32 objectId = 1;
-  PositionInfo posInfo = 2;
-}
-
-message CH_Shoot {
-  PositionInfo posInfo = 1;
-  WeaponType weaponType = 2;
-}
-
-message HC_Shoot {
-  int32 objectId = 1;
-}
-
-message HC_ChangeHp {
-  int32 objectId = 1;
-  float hp = 2;
-}
-
-message HC_Die {
-  int32 objectId = 1;
-  int32 attackerId = 2;
-}
-
-message HS_UpdateRoom {
-  RoomInfo room = 1;
-}
-
-message HS_StartGame {
-  RoomInfo room = 1;
-}
-
-message HS_EndGame {
-  RoomInfo room = 1;
-}
-
-message CH_ExitRoom {
-  UserInfo player = 1;
-}
-
-message CS_Login {
-  UserInfo info = 1;
-}
-
-message SC_RejectLogin {
+message C_Complete{
   
 }
 
-message SC_AcceptLogin {
-  UserInfo userInfo = 1;
+message S_NextProgress{
+  int32 Progress = 1;
 }
 
-message SC_RoomList {
-  repeated RoomInfo rooms = 1;
+message C_StartScenario{
+  string ScenarioName = 1;
 }
 
-message CS_EnterRoom {
-  int32 playerId = 1;
-  int32 roomId = 2;
-  string passWord = 3;
+message S_StartScenario{
+  string ScenarioName = 1;
 }
 
-message SC_RejectEnter {
+message C_Login{
+  UserInfo UserInfo = 1;
+}
+
+message S_EnterGame{
+  ObjectInfo Player = 1;
+}
+
+message S_LeaveGame{
   
 }
 
-message SC_AcceptEnter {
-  string publicIp = 1;
-  string privateIp = 2;
+message S_Spawn{
+  repeated ObjectInfo Objects = 1;
 }
 
-message SH_ConnectClient{
-  string publicIp = 1;
-  string privateIp = 2;
+message S_Despawn{
+  repeated int32 ObjectIds = 1;
 }
 
-message CS_MakeRoom {
-  RoomInfo room = 1;
+message C_Move{
+  MoveInfo MoveInfo = 1;
 }
 
-message SC_AcceptMake{
-  RoomInfo room = 1;
+message S_Move{
+  int32 ObjectId = 1;
+  MoveInfo MoveInfo = 2;
 }
 
-message SC_RejectMake{
-  
+message C_Sync{
+  PosInfo PosInfo = 1;
 }
 
-message RoomInfo {
-  int32 roomId = 1;
-  string roomName = 2;
-  string password = 3;
-  bool secretRoom = 4;
-  int32 curMember = 5;
-  int32 maxMember = 6;
-  int32 hostId = 7;
-  string hostName = 8;
+message S_Sync{
+  int32 ObjectId = 1;
+  PosInfo PosInfo = 2;
 }
 
-message UserInfo {
-  int32 id = 1;
-  string name = 2;
-  string publicIp = 3;
-  string privateIp = 4;
-  int32 port = 5;
-  WeaponType weaponType = 6;
+message ObjectInfo{
+  int32 ObjectId = 1;
+  UserInfo UserInfo = 2;
+  MoveInfo MoveInfo = 3;
+  PosInfo PosInfo = 4;
 }
 
-message ObjectInfo {
-  int32 objectId = 1;
-  string name = 2;
-  PositionInfo posInfo = 3;
-  StatInfo statInfo = 4;
-  WeaponType weaponType = 5;
+message MoveInfo{
+  CreatureState State = 1;
+  float DirX = 2;
+  float DirZ = 3;
+  int32 InputBit = 4;
 }
 
-message PositionInfo {
-  ActionState state = 1;
-  WeaponState weaponState = 2;
-  DirX dir = 3;
-  float posX = 4;
-  float posY = 5;
-  float weaponPosX = 6;
-  float weaponPosY = 7;
-  float dirX = 8;
-  float dirY = 9;
+message PosInfo{
+  float PosX = 1;
+  float PosY = 2;
+  float PosZ = 3;
 }
 
-message StatInfo {
-  float hp = 1;
-  float maxHp = 2;
-  float speed = 3;
-  float damage = 4;
-}
-
-message AttackInfo {
-  int32 attackId = 1;
+message UserInfo{
+  string Name = 1;
+  string Id = 2;
+  string Position = 3;
 }
