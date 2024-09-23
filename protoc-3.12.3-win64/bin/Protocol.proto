@@ -38,6 +38,9 @@ enum CreatureState{
   PUSH = 8;
   SIT = 9;
   TYPING = 10;
+  SWEEPING_FLOOR = 11;
+  USING_TISSUE = 12;
+  LYING_IDLE = 13;
 }
 
 enum GameObjectType{
