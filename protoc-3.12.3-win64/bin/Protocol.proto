@@ -71,10 +71,12 @@ message C_Equip{
 message S_Talk{
   int32 Id = 1;
   string Message = 2;
+  bool TTSSelf = 3;
 }
 
 message C_Talk{
   string Message = 1;
+  bool TTSSelf = 2;
 }
 
 message C_Complete{
