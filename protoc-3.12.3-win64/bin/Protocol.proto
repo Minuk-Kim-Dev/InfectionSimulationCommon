@@ -41,6 +41,7 @@ enum CreatureState{
   SWEEPING_FLOOR = 11;
   USING_TISSUE = 12;
   LYING_IDLE = 13;
+  SYRINGE = 14;
 }
 
 enum GameObjectType{
