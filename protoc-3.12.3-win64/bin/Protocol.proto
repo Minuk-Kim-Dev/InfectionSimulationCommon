@@ -42,6 +42,7 @@ enum CreatureState{
   USING_TISSUE = 12;
   LYING_IDLE = 13;
   SYRINGE = 14;
+  BLOCKING = 15;
 }
 
 enum GameObjectType{
