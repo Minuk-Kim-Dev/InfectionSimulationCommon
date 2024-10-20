@@ -24,6 +24,12 @@ enum MsgId {
   S_EQUIP = 16;
   C_UN_EQUIP = 17;
   S_UN_EQUIP = 18;
+  C_REGIST_ACCOUNT = 19;
+  S_REGIST_ACCOUNT = 20;
+  C_ENTER_GAME = 21;
+  S_LOGIN = 22;
+  C_END_GAME = 23;
+  S_RANK = 24;
 }
 
 enum CreatureState{
@@ -45,10 +51,59 @@ enum CreatureState{
   BLOCKING = 15;
 }
 
+enum PlayerServerState{
+  SERVER_STATE_LOGIN = 0;
+  SERVER_STATE_LOBBY = 1;
+  SERVER_STATE_GAME = 2;
+}
+
+enum LoginState{
+  NO_ACCOUNT = 0;
+  WRONG_PASSWORD = 1;
+  LOGIN_COMPLETE = 2;
+  LOGIN_ERROR = 3;
+}
+
+enum RegistAccountState{
+  EXIST_PLAYER = 0;
+  EXIST_ACCOUNT = 1;
+  REGIST_COMPLETE = 2;
+  REGIST_ERROR = 3;
+}
+
 enum GameObjectType{
   None = 0;
   Player = 1;
   N_P_C = 2;
+}
+
+message S_Rank{
+  repeated ScoreInfo Scores = 1;
+}
+
+message C_EndGame{
+  string Position = 1;
+  int32 FinalScore = 2;
+  int32 FaultCount = 3;
+}
+
+message S_Login{
+  LoginState Result = 1;
+}
+
+message S_RegistAccount{
+  RegistAccountState Result = 1;
+}
+
+message C_RegistAccount{
+  string AccountId = 1;
+  string AccountPw = 2;
+  string PlayerId = 3;
+  string PlayerName = 4;
+}
+
+message C_EnterGame{
+  int32 RoomId = 1;
 }
 
 message S_UnEquip{
@@ -97,7 +152,9 @@ message S_StartScenario{
 }
 
 message C_Login{
-  UserInfo UserInfo = 1;
+  string Position = 1;
+  string AccountId = 2;
+  string AccountPw = 3;
 }
 
 message S_EnterGame{
@@ -155,7 +212,15 @@ message PosInfo{
 }
 
 message UserInfo{
-  string Name = 1;
-  string Id = 2;
-  string Position = 3;
+  string AccountId = 1;
+  string Position = 2;
+}
+
+message ScoreInfo{
+  int32 ScoreId = 1;
+  string Position = 2;
+  int32 FinalScore = 3;
+  int32 FaultCount = 4;
+  int64 GameDate = 5;
+  string AccountId = 6;
 }
