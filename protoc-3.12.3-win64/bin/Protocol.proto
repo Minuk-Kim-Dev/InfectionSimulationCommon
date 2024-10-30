@@ -85,7 +85,6 @@ message S_Rank{
 message C_EndGame{
   string Position = 1;
   int32 FinalScore = 2;
-  int32 FaultCount = 3;
 }
 
 message S_Login{
@@ -220,7 +219,7 @@ message ScoreInfo{
   int32 ScoreId = 1;
   string Position = 2;
   int32 FinalScore = 3;
-  int32 FaultCount = 4;
-  int64 GameDate = 5;
-  string AccountId = 6;
+  int64 GameDate = 4;
+  string AccountId = 5;
+  string PlayerName = 6;
 }
