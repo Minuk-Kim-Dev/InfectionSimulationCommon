@@ -50,6 +50,7 @@ enum CreatureState{
   SYRINGE = 14;
   BLOCKING = 15;
   EMR = 16;
+  DRY_SWAB = 17;
 }
 
 enum PlayerServerState{
