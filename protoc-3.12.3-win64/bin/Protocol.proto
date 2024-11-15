@@ -30,6 +30,7 @@ enum MsgId {
   S_LOGIN = 22;
   C_END_GAME = 23;
   S_RANK = 24;
+  S_PLAYER_RANK = 25;
 }
 
 enum CreatureState{
@@ -77,6 +78,11 @@ enum GameObjectType{
   None = 0;
   Player = 1;
   N_P_C = 2;
+}
+
+message S_PlayerRank{
+  repeated ScoreInfo Scores = 1;
+  int32 GameId = 2;
 }
 
 message S_Rank{
