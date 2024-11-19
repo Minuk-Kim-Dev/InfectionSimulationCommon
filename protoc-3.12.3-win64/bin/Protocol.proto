@@ -64,7 +64,8 @@ enum LoginState{
   NO_ACCOUNT = 0;
   WRONG_PASSWORD = 1;
   LOGIN_COMPLETE = 2;
-  LOGIN_ERROR = 3;
+  ALREADY_START = 3;
+  LOGIN_ERROR = 4;
 }
 
 enum RegistAccountState{
