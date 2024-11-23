@@ -37,6 +37,8 @@ enum MsgId {
   C_MAKE_ROOM = 29;
   S_MAKE_ROOM = 30;
   S_ENTER_ROOM = 31;
+  C_LEAVE_ROOM = 32;
+  S_MAKER_EXIT = 33;
 }
 
 enum CreatureState{
@@ -108,6 +110,14 @@ enum GameObjectType{
   None = 0;
   Player = 1;
   N_P_C = 2;
+}
+
+message S_MakerExit{
+  
+}
+
+message C_LeaveRoom{
+  Scene TargetScene = 1;
 }
 
 message S_EnterRoom{
