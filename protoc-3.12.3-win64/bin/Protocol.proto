@@ -31,6 +31,12 @@ enum MsgId {
   C_END_GAME = 23;
   S_RANK = 24;
   S_PLAYER_RANK = 25;
+  C_REQUEST_ROOM_LIST = 26;
+  S_ROOM_LIST = 27;
+  C_LEAVE_LOBBY = 28;
+  C_MAKE_ROOM = 29;
+  S_MAKE_ROOM = 30;
+  S_ENTER_ROOM = 31;
 }
 
 enum CreatureState{
@@ -57,7 +63,15 @@ enum CreatureState{
 enum PlayerServerState{
   SERVER_STATE_LOGIN = 0;
   SERVER_STATE_LOBBY = 1;
-  SERVER_STATE_GAME = 2;
+  SERVER_STATE_ROOM = 2;
+  SERVER_STATE_GAME = 3;
+}
+
+enum Scene{
+  LOGIN_SCENE = 0;
+  LOBBY_SCENE = 1;
+  ROOM_SCENE = 2;
+  GAME_SCENE = 3;
 }
 
 enum LoginState{
@@ -76,10 +90,42 @@ enum RegistAccountState{
   REGIST_ERROR = 3;
 }
 
+enum MakeRoomState{
+  EXIST_TITLE = 0;
+  MAKE_ROOM_COMPLETE = 1;
+  MAKE_ROOM_ERROR = 2;
+}
+
 enum GameObjectType{
   None = 0;
   Player = 1;
   N_P_C = 2;
+}
+
+message S_EnterRoom{
+  
+}
+
+message S_MakeRoom{
+  MakeRoomState result = 1;
+}
+
+message C_MakeRoom{
+  string Title = 1;
+  string Disease = 2;
+  string Password = 3;
+}
+
+message C_LeaveLobby{
+  Scene TargetScene = 1;
+}
+
+message S_RoomList{
+  repeated RoomInfo Rooms = 1;
+}
+
+message C_RequestRoomList{
+  
 }
 
 message S_PlayerRank{
@@ -232,4 +278,17 @@ message ScoreInfo{
   int64 GameDate = 4;
   string AccountId = 5;
   string PlayerName = 6;
+}
+
+message RoomInfo{
+  string Title = 1;
+  string Maker = 2;
+  string Disease = 3;
+  int32 CurMembers = 4;
+  string Password = 5;
+}
+
+message PositionMatching{
+  int32 Index = 1;
+  string Id = 2;
 }
