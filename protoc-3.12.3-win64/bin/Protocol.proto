@@ -96,6 +96,14 @@ enum MakeRoomState{
   MAKE_ROOM_ERROR = 2;
 }
 
+enum EnterRoomState{
+  FULL_MEMBERS = 0;
+  INCORRECT_PASSWORD = 1;
+  NO_ROOM = 2;
+  ENTER_ROOM_COMPLETE = 3;
+  ENTER_ERROR = 4;
+}
+
 enum GameObjectType{
   None = 0;
   Player = 1;
@@ -103,7 +111,8 @@ enum GameObjectType{
 }
 
 message S_EnterRoom{
-  
+  EnterRoomState Result = 1;
+  repeated PositionMatching Members = 2;
 }
 
 message S_MakeRoom{
