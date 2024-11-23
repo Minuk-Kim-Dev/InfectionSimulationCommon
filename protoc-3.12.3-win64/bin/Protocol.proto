@@ -157,6 +157,7 @@ message C_StartScenario{
 
 message S_StartScenario{
   string ScenarioName = 1;
+  repeated string LackPositions = 2;
 }
 
 message C_Login{
