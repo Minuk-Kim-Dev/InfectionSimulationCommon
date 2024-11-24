@@ -26,19 +26,23 @@ enum MsgId {
   S_UN_EQUIP = 18;
   C_REGIST_ACCOUNT = 19;
   S_REGIST_ACCOUNT = 20;
-  C_ENTER_GAME = 21;
-  S_LOGIN = 22;
-  C_END_GAME = 23;
-  S_RANK = 24;
-  S_PLAYER_RANK = 25;
-  C_REQUEST_ROOM_LIST = 26;
-  S_ROOM_LIST = 27;
-  C_LEAVE_LOBBY = 28;
-  C_MAKE_ROOM = 29;
-  S_MAKE_ROOM = 30;
-  S_ENTER_ROOM = 31;
-  C_LEAVE_ROOM = 32;
-  S_MAKER_EXIT = 33;
+  S_LOGIN = 21;
+  C_END_GAME = 22;
+  S_RANK = 23;
+  S_PLAYER_RANK = 24;
+  C_REQUEST_ROOM_LIST = 25;
+  S_ROOM_LIST = 26;
+  C_LEAVE_LOBBY = 27;
+  C_MAKE_ROOM = 28;
+  S_MAKE_ROOM = 29;
+  S_ENTER_ROOM = 30;
+  C_LEAVE_ROOM = 31;
+  S_MAKER_EXIT = 32;
+  C_REQUEST_ROOM_INFO = 33;
+  S_UPDATE_ROOM_INFO = 34;
+  C_CHANGE_POSITION = 35;
+  C_ENTER_ROOM = 36;
+  C_START_SIMULATION = 37;
 }
 
 enum CreatureState{
@@ -112,6 +116,27 @@ enum GameObjectType{
   N_P_C = 2;
 }
 
+message C_StartSimulation{
+  
+}
+
+message C_EnterRoom{
+  string Title = 1;
+  string Password = 2;
+}
+
+message C_ChangePosition{
+  int32 Position = 1;
+}
+
+message S_UpdateRoomInfo{
+  repeated PositionMatching Players = 1;
+}
+
+message C_RequestRoomInfo{
+  
+}
+
 message S_MakerExit{
   
 }
@@ -175,10 +200,6 @@ message C_RegistAccount{
   string PlayerName = 3;
 }
 
-message C_EnterGame{
-  int32 RoomId = 1;
-}
-
 message S_UnEquip{
   int32 Id = 1;
   string ItemName = 2;
@@ -217,7 +238,7 @@ message S_NextProgress{
 }
 
 message C_StartScenario{
-  string ScenarioName = 1;
+  
 }
 
 message S_StartScenario{
@@ -309,5 +330,5 @@ message RoomInfo{
 
 message PositionMatching{
   int32 Index = 1;
-  string Id = 2;
+  string PlayerId = 2;
 }
