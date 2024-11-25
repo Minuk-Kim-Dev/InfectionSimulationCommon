@@ -26,11 +26,23 @@ enum MsgId {
   S_UN_EQUIP = 18;
   C_REGIST_ACCOUNT = 19;
   S_REGIST_ACCOUNT = 20;
-  C_ENTER_GAME = 21;
-  S_LOGIN = 22;
-  C_END_GAME = 23;
-  S_RANK = 24;
-  S_PLAYER_RANK = 25;
+  S_LOGIN = 21;
+  C_END_GAME = 22;
+  S_RANK = 23;
+  S_PLAYER_RANK = 24;
+  C_REQUEST_ROOM_LIST = 25;
+  S_ROOM_LIST = 26;
+  C_LEAVE_LOBBY = 27;
+  C_MAKE_ROOM = 28;
+  S_MAKE_ROOM = 29;
+  S_ENTER_ROOM = 30;
+  C_LEAVE_ROOM = 31;
+  S_MAKER_EXIT = 32;
+  C_REQUEST_ROOM_INFO = 33;
+  S_UPDATE_ROOM_INFO = 34;
+  C_CHANGE_POSITION = 35;
+  C_ENTER_ROOM = 36;
+  C_START_SIMULATION = 37;
 }
 
 enum CreatureState{
@@ -57,16 +69,23 @@ enum CreatureState{
 enum PlayerServerState{
   SERVER_STATE_LOGIN = 0;
   SERVER_STATE_LOBBY = 1;
-  SERVER_STATE_GAME = 2;
+  SERVER_STATE_ROOM = 2;
+  SERVER_STATE_GAME = 3;
+}
+
+enum Scene{
+  LOGIN_SCENE = 0;
+  LOBBY_SCENE = 1;
+  ROOM_SCENE = 2;
+  GAME_SCENE = 3;
 }
 
 enum LoginState{
   NO_ACCOUNT = 0;
   WRONG_PASSWORD = 1;
   LOGIN_COMPLETE = 2;
-  ALREADY_START = 3;
-  DUPLICATION_POSITION = 4;
-  LOGIN_ERROR = 5;
+  ALREADY_LOGIN = 3;
+  LOGIN_ERROR = 4;
 }
 
 enum RegistAccountState{
@@ -76,10 +95,80 @@ enum RegistAccountState{
   REGIST_ERROR = 3;
 }
 
+enum MakeRoomState{
+  EXIST_TITLE = 0;
+  MAKE_ROOM_COMPLETE = 1;
+  MAKE_ROOM_ERROR = 2;
+}
+
+enum EnterRoomState{
+  FULL_MEMBERS = 0;
+  INCORRECT_PASSWORD = 1;
+  NO_ROOM = 2;
+  ENTER_ROOM_COMPLETE = 3;
+  ENTER_ERROR = 4;
+}
+
 enum GameObjectType{
   None = 0;
   Player = 1;
   N_P_C = 2;
+}
+
+message C_StartSimulation{
+  
+}
+
+message C_EnterRoom{
+  string Title = 1;
+  string Password = 2;
+}
+
+message C_ChangePosition{
+  int32 Position = 1;
+}
+
+message S_UpdateRoomInfo{
+  repeated PositionMatching Players = 1;
+}
+
+message C_RequestRoomInfo{
+  
+}
+
+message S_MakerExit{
+  
+}
+
+message C_LeaveRoom{
+  Scene TargetScene = 1;
+}
+
+message S_EnterRoom{
+  EnterRoomState Result = 1;
+  repeated PositionMatching Members = 2;
+}
+
+message S_MakeRoom{
+  MakeRoomState result = 1;
+}
+
+message C_MakeRoom{
+  string Title = 1;
+  string Disease = 2;
+  string Password = 3;
+}
+
+message C_LeaveLobby{
+  Scene TargetScene = 1;
+}
+
+message S_RoomList{
+  repeated RoomInfo Rooms = 1;
+}
+
+message C_RequestRoomList{
+  
 }
 
 message S_PlayerRank{
@@ -108,10 +197,6 @@ message C_RegistAccount{
   string AccountId = 1;
   string AccountPw = 2;
   string PlayerName = 3;
-}
-
-message C_EnterGame{
-  int32 RoomId = 1;
 }
 
 message S_UnEquip{
@@ -152,7 +237,7 @@ message S_NextProgress{
 }
 
 message C_StartScenario{
-  string ScenarioName = 1;
+  
 }
 
 message S_StartScenario{
@@ -232,4 +317,17 @@ message ScoreInfo{
   int64 GameDate = 4;
   string AccountId = 5;
   string PlayerName = 6;
+}
+
+message RoomInfo{
+  string Title = 1;
+  string Maker = 2;
+  string Disease = 3;
+  int32 CurMembers = 4;
+  string Password = 5;
+}
+
+message PositionMatching{
+  int32 Index = 1;
+  string PlayerId = 2;
 }
