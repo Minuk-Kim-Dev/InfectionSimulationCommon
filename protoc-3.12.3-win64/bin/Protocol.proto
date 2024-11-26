@@ -116,7 +116,7 @@ enum GameObjectType{
 }
 
 message C_StartSimulation{
-  
+  bool UsingNPC = 1;
 }
 
 message C_EnterRoom{
