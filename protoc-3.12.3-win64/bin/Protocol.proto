@@ -43,6 +43,7 @@ enum MsgId {
   C_CHANGE_POSITION = 35;
   C_ENTER_ROOM = 36;
   C_START_SIMULATION = 37;
+  C_EXIT_GAME = 38;
 }
 
 enum CreatureState{
@@ -113,6 +114,10 @@ enum GameObjectType{
   None = 0;
   Player = 1;
   N_P_C = 2;
+}
+
+message C_ExitGame{
+  
 }
 
 message C_StartSimulation{
